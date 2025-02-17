@@ -83,7 +83,7 @@ public class LinkedListDeque<T> implements Deque<T>,Iterable<T> {
     }
 
     @Override
-    public int Size() {
+    public int size() {
         return size;
     }
 
@@ -140,9 +140,9 @@ public class LinkedListDeque<T> implements Deque<T>,Iterable<T> {
         if(obj instanceof Deque){
          Deque<T> temp= (Deque) obj;
          if (temp == this) return true;
-         if(Size()!=temp.Size())
+         if(size()!=temp.size())
              return false;
-         for (int i =0;i < Size() ; i++){
+         for (int i =0;i < size() ; i++){
              if(!(get(i).equals(temp.get(i)))){
                  return false;
              }

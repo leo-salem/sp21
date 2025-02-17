@@ -13,22 +13,22 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
 
     public ArrayDeque() {
         a=(T[])new Object[10];
-        size=0;
-        capacity=8;
-        nextFirst=7;
-        nextLast=0;
+        size = 0;
+        capacity = 8;
+        nextFirst = 7;
+        nextLast = 0;
     }
 
     private void resize(int beforeDoubling) {
 
-        T[] temp=(T[])new Object[capacity];
+        T[] temp= (T[]) new Object[capacity];
 
         //coping the old array in the write order
         // (++nextFirst) points at the first item in the right order
 
-        for (int oldArrIdx=nextFirst+1,newArrIdx=0 ; newArrIdx < size ; oldArrIdx++, newArrIdx++)
-            temp[newArrIdx]=a[oldArrIdx % beforeDoubling];
-
+        for (int oldArrIdx = nextFirst+1,newArrIdx=0; newArrIdx < size; oldArrIdx++, newArrIdx++) {
+            temp[newArrIdx] = a[oldArrIdx % beforeDoubling];
+        }
         a=temp;
         nextFirst= capacity - 1 ;
         nextLast= size;
@@ -38,10 +38,10 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
 
     @Override
     public void addLast(T item) {
-        if(size==capacity){
-            int beforeDoubling=capacity;
+        if(size == capacity){
+            int beforeDoubling = capacity;
             capacity *= 2;
-            resize(beforeDoubling);
+            resize( beforeDoubling );
         }
         size++;
         a[nextLast] = item;
@@ -51,27 +51,27 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
 
     @Override
     public void addFirst(T item) {
-        int beforeDoubling=capacity;
-        if(size==capacity){
+        int beforeDoubling = capacity;
+        if(size == capacity){
             capacity *= 2;
             resize(beforeDoubling);
         }
         size++;
         a[nextFirst] = item;
-        nextFirst =( nextFirst - 1 + beforeDoubling) % beforeDoubling;
+        nextFirst = ( nextFirst - 1 + beforeDoubling) % beforeDoubling;
         //avoid negative values or pass the old capacity
     }
 
 
     @Override
     public T removeFirst() {
-       if(size==0){
+       if(size == 0 ){
            return null;
        }
        nextFirst++;
        nextFirst %= capacity;
-       T returnValue=a[nextFirst];
-       a[nextFirst]=null;
+       T returnValue = a[nextFirst];
+       a[nextFirst] = null;
        size--;
        if((100 * size)/capacity <25 && capacity / 2 >= 8)
        {
@@ -91,8 +91,8 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
         nextLast--;
         nextLast += capacity; //avoid negative values
         nextLast %= capacity;
-        T returnValue=a[nextLast];
-        a[nextLast]=null;
+        T returnValue = a[nextLast];
+        a[nextLast] = null;
         size--;
         if((100.0 * size )/capacity <25 && capacity / 2 >= 8)
         {
@@ -105,7 +105,7 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
     }
 
     @Override
-    public int Size() {
+    public int size() {
         return size;
     }
 
@@ -147,18 +147,18 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        ArrayDequeIterator<T> iterator=new ArrayDeque.ArrayDequeIterator();
+        ArrayDequeIterator<T> iterator = new ArrayDeque.ArrayDequeIterator();
         return iterator;
     }
 
     @Override
     public boolean equals(Object obj){
         if(obj instanceof Deque){
-            Deque<T> temp= (Deque) obj;
+            Deque<T> temp = (Deque) obj;
             if (temp == this) return true;
-            if(Size()!=temp.Size())
+            if(size() != temp.size())
                 return false;
-            for (int i =0;i < Size() ; i++){
+            for (int i =0; i < size() ; i++){
                 if(!(get(i).equals(temp.get(i)))){
                     return false;
                 }

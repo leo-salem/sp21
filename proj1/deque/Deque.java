@@ -6,10 +6,10 @@ public interface Deque<T> {
    void addFirst(T item);
    T removeFirst();
    T removeLast();
-   int Size();
+   int size();
    default boolean isEmpty()
    {
-        return (Size() == 0);
+        return (size() == 0);
    };
    T get(int index);
    void printDeque();

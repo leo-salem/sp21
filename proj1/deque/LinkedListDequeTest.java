@@ -22,14 +22,14 @@ public class LinkedListDequeTest {
 
         // The && operator is the same as "and" in Python.
         // It's a binary operator that returns true if both arguments true, and false otherwise.
-        assertEquals(1, lld1.Size());
+        assertEquals(1, lld1.size());
         assertFalse("lld1 should now contain 1 item", lld1.isEmpty());
 
         lld1.addLast("middle");
-        assertEquals(2, lld1.Size());
+        assertEquals(2, lld1.size());
 
         lld1.addLast("back");
-        assertEquals(3, lld1.Size());
+        assertEquals(3, lld1.size());
 
         System.out.println("Printing out deque: ");
         lld1.printDeque();
@@ -67,7 +67,7 @@ public class LinkedListDequeTest {
         lld1.removeLast();
         lld1.removeFirst();
 
-        int size = lld1.Size();
+        int size = lld1.size();
         String errorMsg = "  Bad size returned when removing from empty deque.\n";
         errorMsg += "  student size() returned " + size + "\n";
         errorMsg += "  actual size() returned 0\n";
