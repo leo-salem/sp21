@@ -3,10 +3,10 @@ package deque;
 import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Deque<T>,Iterable<T> {
-    public class Node<T> {
+    private class Node<T> {
         T item;
-        Node next;
-        Node prev;
+         Node next;
+         Node prev;
         public Node(T item, Node prev, Node next) {
             this.item = item;
             this.prev = prev;
@@ -112,27 +112,27 @@ public class LinkedListDeque<T> implements Deque<T>,Iterable<T> {
        return (T)Recurcive(index - 1, pointer.next);
     }
 
-    private class LinkedListDequeIterator<T>  implements Iterator<T> {
+    private class LinkedListDequeIterator<T> implements Iterator<T> {
         int pos;
-        public LinkedListDequeIterator() {
+
+        LinkedListDequeIterator() {
             pos = 0;
         }
 
-        @Override
         public boolean hasNext() {
-            return pos < size;
+            return pos < size();
         }
 
-        @Override
         public T next() {
+            T x = (T) get(pos);
             pos++;
-            return (T)get(pos);
+            return x;
         }
     }
+
     @Override
     public Iterator<T> iterator() {
-        LinkedListDequeIterator<T> iterator=new LinkedListDequeIterator();
-        return iterator;
+        return new LinkedListDequeIterator<>();
     }
 
     @Override

@@ -116,30 +116,24 @@ public class ArrayDeque<T> implements Deque<T>,Iterable<T> {
         }
         System.out.println();
     }
-    private class ArrayDequeIterator<T>  implements Iterator<T> {
-        private int pos;
-        public ArrayDequeIterator() {
-            pos = 0;
-        }
+    private class ArrayDequeIterator<T> implements Iterator<T> {
+        private int pos = 0;
 
-        @Override
         public boolean hasNext() {
-            return pos < size;
+            return pos < size();
         }
 
-        @Override
         public T next() {
+            T x = (T) get(pos);
             pos++;
-            return (T)get(pos);
+            return x;
         }
     }
 
     @Override
     public Iterator<T> iterator() {
-        ArrayDequeIterator<T> iterator = new ArrayDeque.ArrayDequeIterator();
-        return iterator;
+        return new ArrayDequeIterator<>();
     }
-
     @Override
     public boolean equals(Object obj){
         if(obj instanceof Deque){
