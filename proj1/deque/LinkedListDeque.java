@@ -64,7 +64,7 @@ public class LinkedListDeque<T> implements Deque<T>,Iterable<T> {
         if (isEmpty()) {
             return null;
         }
-        T returnValue = (T) sentinel.prev.item;
+        T returnValue = sentinel.prev.item;
         sentinel.prev = sentinel.prev.prev;
         sentinel.prev.next = sentinel;
         size--;
@@ -91,7 +91,7 @@ public class LinkedListDeque<T> implements Deque<T>,Iterable<T> {
      helper method
     */
 
-    public T getRecurcive(int index){
+    public T getRecursive(int index){
         if(index < 0 || index >= size) {
             return null;
         }
