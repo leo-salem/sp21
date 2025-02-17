@@ -7,79 +7,64 @@ public class LinkedListDeque<T> implements Deque<T>,Iterable<T> {
         T item;
          Node next;
          Node prev;
-        public Node(T item, Node prev, Node next) {
+        public Node(T item, Node next, Node prev) {
             this.item = item;
             this.prev = prev;
             this.next = next;
         }
+        public Node() {}
     }
 
     private int size;
 
-    private Node<T> head;
-    private Node<T> tail;
+    private Node<T> sentinel;
 
 
     public LinkedListDeque() {
-        head = null;
-        tail = null;
+        sentinel = new Node<>();
+        sentinel.next = sentinel;
+        sentinel.prev = sentinel;
         size = 0;
     }
 
     @Override
     public void addLast(T item) {
-        Node<T> newNode = new Node<>(item, tail, null);
-        if (tail == null) {
-            head = newNode;  // If list was empty, head also points to newNode
-        } else {
-            tail.next = newNode;  // Link old tail(new "before last" item) to newNode
-        }
-        tail = newNode;  // Update tail
+        Node<T> temp = new Node<>(item , sentinel , sentinel.prev);
+        sentinel.prev.next = temp;
+        sentinel.prev = temp;
         size++;
     }
 
     @Override
     public void addFirst(T item) {
-        Node<T> newNode=new Node<>(item, null ,head);
-        if (head == null) {
-            tail = newNode;  // If the list was empty, tail also points to newNode (new last item)
-        } else {
-            head.prev = newNode;  // Link old head (new "second" item) to newNode (new first element)
-        }
-        head = newNode;  // Update head
+        Node<T> temp=new Node<>( item , sentinel.next , sentinel );
+        sentinel.next.prev = temp;
+        sentinel.next = temp;
         size++;
     }
 
     @Override
     public T removeFirst() {
-        if (head == null) return null;  // Empty list
-
-        T first = head.item;  // Get value
-        head = head.next;  // Move head pointer
-
-        if (head == null) {
-            tail = null;  // If list is now empty, update tail
-        } else {
-            head.prev = null;  // Remove old head reference
+        if (isEmpty()) {
+            return null;
         }
+        T returnValue = (T) sentinel.next.item;
+        sentinel.next = sentinel.next.next;
+        sentinel.next.prev = sentinel;
         size--;
-        return first;
+        return returnValue;
     }
 
     @Override
     public T removeLast() {
-        if (tail == null) return null;  // Empty list
-
-        T item = tail.item;  // Get value
-        tail = tail.prev;  // Move tail pointer
-
-        if (tail == null) {
-            head = null;  // If list is now empty, update head
-        } else {
-            tail.next = null;  // Remove old tail reference
+        if (isEmpty()) {
+            return null;
         }
+        T returnValue = (T) sentinel.prev.item;
+        sentinel.prev = sentinel.prev.prev;
+        sentinel.prev.next = sentinel;
         size--;
-        return item;
+        return returnValue;
     }
 
     @Override
@@ -90,7 +75,7 @@ public class LinkedListDeque<T> implements Deque<T>,Iterable<T> {
     @Override
     public T get(int index) {
         if(index < 0 || index >= size) return null;
-        Node<T> current = head;
+        Node<T> current = sentinel.next;
         while (index > 0){
             index--;
             current = current.next;
@@ -104,7 +89,7 @@ public class LinkedListDeque<T> implements Deque<T>,Iterable<T> {
 
     public T getRecurcive(int index){
         if(index < 0 || index >= size) return null;
-        return Recurcive(index, head);
+        return (T) Recurcive(index, sentinel.next);
     }
     private T Recurcive(int index, Node<T> pointer){
        if(index == 0)
@@ -156,9 +141,8 @@ public class LinkedListDeque<T> implements Deque<T>,Iterable<T> {
 
     @Override
     public void printDeque() {
-        if (head == null) return;
-        Node<T> current = head;
-        while (current != null) {
+        Node<T> current = sentinel.next;
+        while (current != sentinel) {
             System.out.print(current.item + " ");
             current = current.next;
         }
