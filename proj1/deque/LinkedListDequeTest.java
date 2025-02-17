@@ -14,7 +14,7 @@ public class LinkedListDequeTest {
      * && is the "and" operation. */
     public void addIsEmptySizeTest() {
 
-//        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
+
         LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
 
         assertTrue("A newly initialized LLDeque should be empty", lld1.isEmpty());
@@ -33,7 +33,9 @@ public class LinkedListDequeTest {
 
         System.out.println("Printing out deque: ");
         lld1.printDeque();
+
     }
+
     @Test
     /** Adds an item, then removes an item, and ensures that dll is empty after wards. */
     public void addRemoveTest() {
@@ -94,7 +96,7 @@ public class LinkedListDequeTest {
     /* check if null is return when removing from an empty LinkedListDeque. */
     public void emptyNullReturnTest() {
 
-        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
+        //System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
         LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
 
         boolean passed1 = false;
