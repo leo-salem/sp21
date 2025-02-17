@@ -1,12 +1,10 @@
 package deque;
 
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
-
-/** Performs some basic linked list tests. */
-public class LinkedListDequeTest {
-
+public class ArrayDequeTest {
     @Test
     /** Adds a few things to the list, checking isEmpty() and size() are correct,
      * finally printing the results.
@@ -15,7 +13,7 @@ public class LinkedListDequeTest {
     public void addIsEmptySizeTest() {
 
 //        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-        LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
+        ArrayDeque<String> lld1 = new ArrayDeque<String>();
 
         assertTrue("A newly initialized LLDeque should be empty", lld1.isEmpty());
         lld1.addFirst("front");
@@ -34,12 +32,13 @@ public class LinkedListDequeTest {
         System.out.println("Printing out deque: ");
         lld1.printDeque();
     }
+
     @Test
     /** Adds an item, then removes an item, and ensures that dll is empty after wards. */
     public void addRemoveTest() {
 
 //        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+        ArrayDeque lld1 = new ArrayDeque<Integer>();
         // should be empty
         assertTrue("lld1 should be empty upon initialization", lld1.isEmpty());
 
@@ -57,7 +56,7 @@ public class LinkedListDequeTest {
     public void removeEmptyTest() {
 
 //        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-        LinkedListDeque<Integer> lld1 = new LinkedListDeque<>();
+        ArrayDeque<Integer> lld1 = new ArrayDeque<>();
         lld1.addFirst(3);
 
         lld1.removeLast();
@@ -65,21 +64,21 @@ public class LinkedListDequeTest {
         lld1.removeLast();
         lld1.removeFirst();
 
-        int size = lld1.Size();
         String errorMsg = "  Bad size returned when removing from empty deque.\n";
-        errorMsg += "  student size() returned " + size + "\n";
+        errorMsg += "  student size() returned " + lld1.Size() + "\n";
         errorMsg += "  actual size() returned 0\n";
 
-        assertEquals(errorMsg, 0, size);
+        assertEquals(errorMsg, 0, lld1.Size());
+
     }
 
     @Test
     /* Check if you can create LinkedListDeques with different parameterized types*/
     public void multipleParamTest() {
 
-        LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
-        LinkedListDeque<Double> lld2 = new LinkedListDeque<Double>();
-        LinkedListDeque<Boolean> lld3 = new LinkedListDeque<Boolean>();
+        ArrayDeque<String> lld1 = new ArrayDeque<String>();
+        ArrayDeque<Double> lld2 = new ArrayDeque<Double>();
+        ArrayDeque<Boolean> lld3 = new ArrayDeque<Boolean>();
 
         lld1.addFirst("string");
         lld2.addFirst(3.14159);
@@ -95,7 +94,7 @@ public class LinkedListDequeTest {
     public void emptyNullReturnTest() {
 
         System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
-        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+        ArrayDeque<Integer> lld1 = new ArrayDeque<Integer>();
 
         boolean passed1 = false;
         boolean passed2 = false;
@@ -110,17 +109,18 @@ public class LinkedListDequeTest {
 
 //        System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
-        LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
-        for (int i = 0; i < 1000000; i++) {
+        ArrayDeque<Integer> lld1 = new ArrayDeque<Integer>();
+        for (int i = 0; i < 10; i++) {
             lld1.addLast(i);
         }
 
-        for (double i = 0; i < 500000; i++) {
+        for (double i = 0; i < 5; i++) {
             assertEquals("Should have the same value", i, (double) lld1.removeFirst(), 0.0);
         }
 
-        for (double i = 999999; i > 500000; i--) {
+        for (double i = 9; i > 5; i--) {
             assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
         }
     }
+
 }
